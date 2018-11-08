@@ -53,11 +53,6 @@ class StartScrap
     end
   end
 
-  def perform
-    print "Scrapping en cours...                            \r".yellow
-    hash_cryptos = get_cryptos(@PAGE)
-    # loop(PAGE) #On lance la boucle infinie pour actualiser toutes les heures
-  end
 
   def save # Créer ou mettre à jour les crypto en db
     hash_cryptos = get_cryptos(@PAGE)
@@ -74,7 +69,13 @@ class StartScrap
         crypto.save
       end
     end
+  end
 
+
+  def perform
+    print "Scrapping en cours...                            \r".yellow
+    save
+    # loop(PAGE) #On lance la boucle infinie pour actualiser toutes les heures
   end
 
 end
