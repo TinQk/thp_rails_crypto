@@ -2,14 +2,14 @@
 
 
 <div class = "text-center">
-
-<h1>Home#show</h1>
-<p>Find me in app/views/home/show.html.erb</p>
-
-<% if @crypto && @crypto.name && @crypto.value %>
-        name:<%= @crypto.name %>
-        value: <%= @crypto.value %>
+<div id = "q">
+        <% if @crypto && @crypto.name && @crypto.value %>
+                La valeur d'un <%= @crypto.name %> est : <%= @crypto.value %>
         <% else %>
-        demande en une autre thx
-       <%end%>
-       </div>
+                demande en une autre thxdemande une Crypto qui existe stp
+        <%end%><br><br><br>
+        <a href = "<%=home_index_path%>">
+        clique ici pour faire une nouvelle recherche
+        </a>
+</div>
+</div>
