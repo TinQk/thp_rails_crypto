@@ -4,8 +4,8 @@ require 'awesome_print'
 
 class StartScrap
 
-  def initialize(webpage)
-    PAGE = Nokogiri::HTML(open(webpage))
+  def initialize(webpage="https://coinmarketcap.com/all/views/all")
+    @PAGE = Nokogiri::HTML(open(webpage))
     #Récupère le contenu HTML du lien donné
   end
 
@@ -55,8 +55,26 @@ class StartScrap
 
   def perform
     print "Scrapping en cours...                            \r".yellow
-    get_cryptos(PAGE)
+    hash_cryptos = get_cryptos(@PAGE)
     # loop(PAGE) #On lance la boucle infinie pour actualiser toutes les heures
+  end
+
+  def save # Créer ou mettre à jour les crypto en db
+    hash_cryptos = get_cryptos(@PAGE)
+
+    hash_cryptos.each do |k, v|
+      # Si crypto existante, mettre à jour sa valeur en db
+      if Crypto.find_by(name: k)
+        Crypto.find_by(name: k).value = v
+      # Si nouvelle crypto, la créer en db
+      else
+        crypto = Crypto.new
+        crypto.name = k
+        crypto.value = v
+        crypto.save
+      end
+    end
+
   end
 
 end
