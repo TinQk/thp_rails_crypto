@@ -1,0 +1,17 @@
+
+ <div class = "text-center">
+ <div id ="k">
+ <div class="row">
+   <div class="col-md-6 col-md-offset-3">
+     <%= form_for(:home, url: home_show_path) do |f| %>
+         <%= f.label :cryptomonnaie %>
+       <%= f.text_field :name, class: 'form-control' %>
+       <div >
+       <p id="z"><%=f.submit "save", class: "btn btn-primary" %></p>
+   
+     <% end %>
+     </div>
+   </div>
+ </div>
+ </div>
+ </div>
